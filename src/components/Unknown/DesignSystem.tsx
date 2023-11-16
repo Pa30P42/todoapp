@@ -28,6 +28,9 @@ interface Props {
   style?: TextStyle;
   weight?: WeightKeys;
   underline?: boolean;
+  color?: string;
+  light?: boolean;
+  crossed?: boolean;
   children?: string;
 }
 
@@ -38,9 +41,17 @@ const BaseText: React.FC<Props> = ({
   style,
   weight = 'normal',
   underline = false,
+  color = '#1B1B1D',
+  light = false,
+  crossed = false,
   ...props
 }) => {
-  const textDecorationLine = underline ? 'underline' : 'none';
+  const textDecorationLine = underline
+    ? 'underline'
+    : crossed
+    ? 'line-through'
+    : 'none';
+  const opacity = light ? 0.7 : 1;
 
   return (
     <Text
@@ -51,7 +62,8 @@ const BaseText: React.FC<Props> = ({
           fontSize,
           lineHeight,
           letterSpacing,
-          color: '#1E1E1E',
+          color,
+          opacity,
         },
         style,
       ]}

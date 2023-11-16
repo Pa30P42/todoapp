@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {H1} from '../components/Unknown/DesignSystem';
 import StyledButton from '../components/Unknown/StyledButton';
+import Task from '../components/Unknown/Task';
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
         }}>
         Font check
       </Text>
+      <Task time="Enter time" title="Any text" />
       <StyledButton onPress={() => {}} title="Press" />
     </View>
   );

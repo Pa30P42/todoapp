@@ -26,7 +26,11 @@ const Home = () => {
       <Task time="Enter time" title="Any text" />
       <StyledButton onPress={() => {}} title="Press" />
       <View className="bg-black p-4 w-full">
-        <StyledTextInput label="Label" />
+        <StyledTextInput
+          multiline={true}
+          inputClassName="h-[200]"
+          label="Label"
+        />
       </View>
       <View className="flex-row">
         <DatePicker containerStyles="mr-2" type="date" />

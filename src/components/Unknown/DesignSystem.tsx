@@ -26,6 +26,7 @@ interface Props {
   lineHeight?: number;
   letterSpacing?: number;
   style?: TextStyle;
+  className?: string;
   weight?: WeightKeys;
   underline?: boolean;
   color?: string;
@@ -39,6 +40,7 @@ const BaseText: React.FC<Props> = ({
   lineHeight,
   letterSpacing,
   style,
+  className,
   weight = 'normal',
   underline = false,
   color = '#1B1B1D',
@@ -67,6 +69,7 @@ const BaseText: React.FC<Props> = ({
         },
         style,
       ]}
+      className={className}
       {...props}
     />
   );

@@ -4,6 +4,7 @@ import {H1} from '../components/Unknown/DesignSystem';
 import StyledButton from '../components/Unknown/StyledButton';
 import Task from '../components/Unknown/Task';
 import StyledTextInput from '../components/Unknown/StyledTextInput';
+import DatePicker from '../components/Unknown/DatePicker';
 
 const Home = () => {
   return (
@@ -26,6 +27,10 @@ const Home = () => {
       <StyledButton onPress={() => {}} title="Press" />
       <View className="bg-black p-4 w-full">
         <StyledTextInput label="Label" />
+      </View>
+      <View className="flex-row">
+        <DatePicker containerStyles="mr-2" type="date" />
+        <DatePicker type="time" />
       </View>
     </View>
   );

@@ -1,7 +1,5 @@
 import React, {useState, useCallback} from 'react';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-// import ToDoUncompleted from './ToDoUncompleted';
-// import ToDoCompleted from './ToDoCompleted';
 import {View} from 'react-native';
 import TodoList from '../TodoList';
 import {H3} from '../../Unknown/DesignSystem';

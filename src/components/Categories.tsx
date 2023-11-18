@@ -3,9 +3,13 @@ import {View} from 'react-native';
 import {EventIcon, GoalIcon, TaskIcon} from './icons';
 import {BodySmallSB} from './Unknown/DesignSystem';
 
-const Categories = () => {
+interface Props {
+  containerClassName: string;
+}
+
+const Categories: React.FC<Props> = ({containerClassName}) => {
   return (
-    <View className="flex-row items-center">
+    <View className={`flex-row items-center ${containerClassName}`}>
       <BodySmallSB className="mr-6">Category</BodySmallSB>
       <View className="items-center py-3">
         <View className="flex-row  justify-between">

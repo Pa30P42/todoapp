@@ -6,6 +6,7 @@ import {
 import Home from '../screens/Home';
 import CreateTask from '../screens/CreateTask';
 import Header from '../components/Unknown/Header';
+import CloseButton from '../components/Unknown/CloseButton';
 
 export type RootStackParams = {
   Home: undefined;
@@ -24,7 +25,15 @@ const RootNavigator: React.FC<NativeStackScreenProps<RootStackParams>> = () => {
         name="Home"
         component={Home}
       />
-      <RootStack.Screen name="CreateTask" component={CreateTask} />
+      <RootStack.Screen
+        options={{
+          header: () => (
+            <Header headerLeft={<CloseButton />} title="Add New Task" />
+          ),
+        }}
+        name="CreateTask"
+        component={CreateTask}
+      />
     </RootStack.Navigator>
   );
 };

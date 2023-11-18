@@ -2,15 +2,15 @@ import React from 'react';
 import {View} from 'react-native';
 import {BodySB, BodySmall} from './DesignSystem';
 import {CheckedIcon, EventIcon, GoalIcon, TaskIcon} from '../icons';
+import {Todo} from '../../types';
 
 interface Props {
-  title: string;
-  category?: 'event' | 'task' | 'goal';
-  completed: boolean;
-  time?: string;
+  todo: Todo;
 }
 
-const Task: React.FC<Props> = ({title, category = 'task', completed, time}) => {
+const Task: React.FC<Props> = ({todo}) => {
+  const {title, category, completed, time} = todo;
+
   const renderIcon = () => {
     switch (category) {
       case 'event':
@@ -25,7 +25,7 @@ const Task: React.FC<Props> = ({title, category = 'task', completed, time}) => {
   };
 
   return (
-    <View className="flex-row w-full justify-between items-center p-4">
+    <View className="flex-row w-full justify-between items-center p-4 border-b border-lightGray">
       <View className={`flex-row items-center ${completed && 'opacity-40'}`}>
         <View className="mr-3">{renderIcon()}</View>
         <View>

@@ -8,11 +8,11 @@ import {
 import {BodySmallSB} from './DesignSystem';
 
 interface Props {
-  placeholder: string;
-  label: string;
+  placeholder?: string;
+  label?: string;
   value: string;
-  multiline: boolean;
-  inputClassName: string;
+  multiline?: boolean;
+  inputClassName?: string;
   onTextChange: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
 }
 

@@ -5,7 +5,7 @@ const EventIcon = (props: SvgProps) => {
   const {width, height, color} = props;
   return (
     <Svg width={width || 48} height={height || 48} fill="none" {...props}>
-      <Rect width={48} height={48} fill={color || '#E7E2F3'} rx={24} />
+      <Rect width={48} height={48} fill={color || '#fff'} rx={24} />
       <G clipPath="url(#a)">
         <Path
           fill="#4A3780"

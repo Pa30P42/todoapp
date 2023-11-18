@@ -78,7 +78,7 @@ const BaseText: React.FC<Props> = ({
 const Header = (props: Props) => <BaseText weight="semi-bold" {...props} />;
 
 export const H1 = (props: Props) => (
-  <Header fontSize={30} lineHeight={30} {...props} />
+  <Header fontSize={30} lineHeight={30} weight="bold" {...props} />
 );
 
 export const H2 = (props: Props) => (

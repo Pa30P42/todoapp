@@ -3,74 +3,31 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {View} from 'react-native';
 import TodoList from '../TodoList';
 import {H3} from '../../Unknown/DesignSystem';
+import {useAppSelector} from '../../../hooks/reduxHooks';
+import {RootState} from '../../../store';
 
-const mockData = [
-  {
-    id: 1,
-    title: 'Tas k1 ',
-    completed: false,
-    category: 'task',
-    time: '4:00 P.M',
-  },
-  {
-    id: 2,
-    title: 'Tas k1 ',
-    completed: false,
-    category: 'task',
-    time: '4:00 P.M',
-  },
-  {
-    id: 3,
-    title: 'Tas k2 ',
-    completed: false,
-    category: 'task',
-    time: '4:00 P.M',
-  },
-];
-
-const completedTodos = [
-  {
-    id: 4,
-    title: 'Tas k4 ',
-    completed: true,
-    category: 'event',
-    time: '4:00 P.M',
-  },
-  {
-    id: 5,
-    title: 'Tas k234 ',
-    completed: true,
-    category: 'goal',
-    time: '4:00 P.M',
-  },
-  {
-    id: 6,
-    title: 'Tas k234 ',
-    completed: true,
-    category: 'goal',
-    time: '4:00 P.M',
-  },
-  {
-    id: 7,
-    title: 'Tas k234 ',
-    completed: true,
-    category: 'goal',
-    time: '4:00 P.M',
-  },
-];
-
-const UncompletedToDos = () => (
-  <View className="flex-1 items-center rounded-2xl bg-primaryWhite">
-    <H3 className="py-2">Current Tasks</H3>
-    <TodoList todos={mockData} />
-  </View>
-);
-const CompletedToDos = () => (
-  <View className="w-full items-center rounded-2xl bg-primaryWhite">
-    <H3 className="py-2">Completed Tasks</H3>
-    <TodoList todos={completedTodos} />
-  </View>
-);
+const UncompletedToDos = () => {
+  const todos = useAppSelector((state: RootState) =>
+    state.todos.filter(todo => !todo.completed),
+  );
+  return (
+    <View className="flex-1 items-center rounded-2xl bg-primaryWhite">
+      <H3 className="py-2">Current Tasks</H3>
+      <TodoList todos={todos} />
+    </View>
+  );
+};
+const CompletedToDos = () => {
+  const todos = useAppSelector((state: RootState) =>
+    state.todos.filter(todo => todo.completed),
+  );
+  return (
+    <View className="w-full items-center rounded-2xl bg-primaryWhite">
+      <H3 className="py-2">Completed Tasks</H3>
+      <TodoList todos={todos} />
+    </View>
+  );
+};
 
 const renderTabBar = (props: any) => {
   return (
@@ -101,7 +58,7 @@ const TodoTabs = () => {
   }, []);
 
   return (
-    <View className="w-full h-full" style={{flex: 1}}>
+    <View className="flex-1 w-full h-full">
       <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}

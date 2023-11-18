@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
@@ -6,18 +6,26 @@ import {
 } from 'react-native';
 import StyledTextInput from '../../Unknown/StyledTextInput';
 import Categories from '../../Categories';
+import {useAppDispatch} from '../../../hooks/reduxHooks';
+import {searchTodo} from '../../../store/todoSlice';
 
 type Category = 'task' | 'event' | 'goal';
 
 const TodoFilterPanel = () => {
   const [searchValue, setSearchValue] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category[]>([]);
-  const handleSearchChange = (
-    text: NativeSyntheticEvent<TextInputChangeEventData>,
-  ) => {
-    console.log('text', text);
-    // setSearchValue(text);
+
+  const dispatch = useAppDispatch();
+
+  const handleSearchChange = (text: string) => {
+    setSearchValue(text);
   };
+
+  useEffect(() => {
+    console.log('searchValue', searchValue);
+    dispatch(searchTodo(searchValue));
+  }, [searchValue, dispatch]);
+
   return (
     <View className="w-full">
       <StyledTextInput

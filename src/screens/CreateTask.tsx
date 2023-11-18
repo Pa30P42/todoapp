@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import Layout from '../components/Unknown/Layout';
 import StyledTextInput from '../components/Unknown/StyledTextInput';
 import Categories from '../components/Categories';

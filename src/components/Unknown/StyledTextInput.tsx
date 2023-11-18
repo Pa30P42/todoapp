@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  NativeSyntheticEvent,
-  TextInput,
-  TextInputChangeEventData,
-  View,
-} from 'react-native';
+import {TextInput, View} from 'react-native';
 import {BodySmallSB} from './DesignSystem';
 
 interface Props {
@@ -13,7 +8,7 @@ interface Props {
   value: string;
   multiline?: boolean;
   inputClassName?: string;
-  onTextChange: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
+  onTextChange: (text: string) => void;
 }
 
 const StyledTextInput: React.FC<Props> = ({
@@ -32,7 +27,7 @@ const StyledTextInput: React.FC<Props> = ({
         placeholder={placeholder}
         className={`px-4 py-5 rounded-md bg-primaryWhite ${inputClassName}`}
         value={value}
-        onChange={onTextChange}
+        onChangeText={onTextChange}
       />
     </View>
   );

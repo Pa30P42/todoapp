@@ -6,7 +6,8 @@ import Categories from '../components/Categories';
 import DatePicker from '../components/Unknown/DatePicker';
 import StyledButton from '../components/Unknown/StyledButton';
 
-const CreateTask = () => {
+const CreateTodo = () => {
+  const handleCreateTodo = () => {};
   return (
     <Layout>
       <View className="flex-1 justify-between">
@@ -25,9 +26,9 @@ const CreateTask = () => {
           />
         </View>
       </View>
-      <StyledButton title="Save" />
+      <StyledButton onPress={handleCreateTodo} title="Save" />
     </Layout>
   );
 };
 
-export default CreateTask;
+export default CreateTodo;

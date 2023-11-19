@@ -1,19 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-  View,
-} from 'react-native';
+import {View} from 'react-native';
 import StyledTextInput from '../../Unknown/StyledTextInput';
 import Categories from '../../Categories';
 import {useAppDispatch} from '../../../hooks/reduxHooks';
-import {searchTodo} from '../../../store/todoSlice';
-
-type Category = 'task' | 'event' | 'goal';
+import {toggleCategory, updateSearchValue} from '../../../store/todoSlice';
+import {TodoCategory} from '../../../types/todo';
 
 const TodoFilterPanel = () => {
   const [searchValue, setSearchValue] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<Category[]>([]);
 
   const dispatch = useAppDispatch();
 
@@ -21,9 +15,12 @@ const TodoFilterPanel = () => {
     setSearchValue(text);
   };
 
+  const selectFilterCategory = (category: TodoCategory) => {
+    dispatch(toggleCategory(category));
+  };
+
   useEffect(() => {
-    console.log('searchValue', searchValue);
-    dispatch(searchTodo(searchValue));
+    dispatch(updateSearchValue(searchValue));
   }, [searchValue, dispatch]);
 
   return (
@@ -34,7 +31,7 @@ const TodoFilterPanel = () => {
         value={searchValue}
         placeholder="Search Tasks"
       />
-      <Categories />
+      <Categories onCategoryPress={selectFilterCategory} />
     </View>
   );
 };

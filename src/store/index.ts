@@ -16,7 +16,7 @@ if (__DEV__) {
 }
 
 const rootReducer = combineReducers({
-  todos: todosReducer,
+  todo: todosReducer,
 });
 
 const store = configureStore({

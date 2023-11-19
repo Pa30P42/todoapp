@@ -3,28 +3,25 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {View} from 'react-native';
 import TodoList from '../TodoList';
 import {H3} from '../../Unknown/DesignSystem';
-import {useAppSelector} from '../../../hooks/reduxHooks';
-import {RootState} from '../../../store';
+import useFilteredTodos from '../../../hooks/useFilteredTodos';
 
 const UncompletedToDos = () => {
-  const todos = useAppSelector((state: RootState) =>
-    state.todos.filter(todo => !todo.completed),
-  );
+  const uncompletedTodos = useFilteredTodos(false);
+
   return (
     <View className="flex-1 items-center rounded-2xl bg-primaryWhite">
       <H3 className="py-2">Current Tasks</H3>
-      <TodoList todos={todos} />
+      <TodoList todos={uncompletedTodos} />
     </View>
   );
 };
 const CompletedToDos = () => {
-  const todos = useAppSelector((state: RootState) =>
-    state.todos.filter(todo => todo.completed),
-  );
+  const completedTodos = useFilteredTodos(true);
+
   return (
     <View className="w-full items-center rounded-2xl bg-primaryWhite">
       <H3 className="py-2">Completed Tasks</H3>
-      <TodoList todos={todos} />
+      <TodoList todos={completedTodos} />
     </View>
   );
 };

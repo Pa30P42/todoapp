@@ -1,27 +1,26 @@
 import React from 'react';
 import {View} from 'react-native';
-import {EventIcon, GoalIcon, TaskIcon} from './icons';
 import {BodySmallSB} from './Unknown/DesignSystem';
+import {TodoCategory} from '../types/todo';
+import Category from './Category';
 
-interface Props {
-  containerClassName: string;
+interface ICategories {
+  containerClassName?: string;
+  onCategoryPress: (category: TodoCategory) => void;
 }
 
-const Categories: React.FC<Props> = ({containerClassName}) => {
+const Categories: React.FC<ICategories> = ({
+  containerClassName,
+  onCategoryPress,
+}) => {
   return (
     <View className={`flex-row items-center ${containerClassName}`}>
       <BodySmallSB className="mr-6">Category</BodySmallSB>
       <View className="items-center py-3">
-        <View className="flex-row  justify-between">
-          <View className="rounded-full border-2 border-primaryWhite mr-4">
-            <GoalIcon />
-          </View>
-          <View className="rounded-full border-2 border-primaryWhite mr-4">
-            <TaskIcon />
-          </View>
-          <View className="rounded-full border-2 border-primaryWhite">
-            <EventIcon />
-          </View>
+        <View className="flex-row justify-between">
+          <Category onPress={onCategoryPress} type="task" />
+          <Category onPress={onCategoryPress} type="event" />
+          <Category onPress={onCategoryPress} type="goal" />
         </View>
       </View>
     </View>

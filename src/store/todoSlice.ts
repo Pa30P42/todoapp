@@ -1,11 +1,8 @@
-// import {ITask} from '@/types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Todo} from '../types';
+import {TodoCategory} from '../types/todo';
 
-const TODOS_STORAGE_KEY = 'todos';
-
-const mockTodos = [
+const mockTodos: Todo[] = [
   {
     id: 1,
     title: 'Friend birthday party',
@@ -57,49 +54,62 @@ const mockTodos = [
   },
 ];
 
-const initialState: Todo[] = mockTodos;
+type TodoSlice = {
+  todos: Todo[];
+  searchValue: string;
+  selectedCategories: TodoCategory[];
+};
+
+const initialState: TodoSlice = {
+  todos: mockTodos,
+  searchValue: '',
+  selectedCategories: [],
+};
 
 export const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.unshift(action.payload);
-      saveTodosToStorage(state);
+      state.todos.unshift(action.payload);
     },
     toggleTodo: (state, action) => {
-      const todo = state.find(task => task.id === action.payload.id);
+      const todo = state.todos.find(task => task.id === action.payload.id);
       if (todo) {
         todo.completed = !todo.completed;
-        saveTodosToStorage(state);
       }
     },
-    searchTodo: (state, action: PayloadAction<string>) => {
-      const searchedTodo = action.payload.toLowerCase();
-      console.log('searchedTodo', searchedTodo.length);
-
-      return state.filter(todo =>
-        todo.title.toLowerCase().includes(searchedTodo),
-      );
-    },
     deleteTodo: (state, action) => {
-      const index = state.findIndex(task => task.id === action.payload.id);
+      const index = state.todos.findIndex(
+        task => task.id === action.payload.id,
+      );
       if (index !== -1) {
-        state.splice(index, 1);
-        saveTodosToStorage(state);
+        state.todos.splice(index, 1);
+      }
+    },
+    updateSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload.toLowerCase();
+    },
+    toggleCategory: (state, action: PayloadAction<TodoCategory>) => {
+      const categoryIndex = state.selectedCategories.findIndex(
+        category => category === action.payload,
+      );
+
+      if (categoryIndex === -1) {
+        state.selectedCategories.push(action.payload);
+      } else {
+        state.selectedCategories.splice(categoryIndex, 1);
       }
     },
   },
 });
 
-const saveTodosToStorage = (todos: Todo[]) => {
-  AsyncStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos))
-    .then(() => console.log('Tasks saved to AsyncStorage'))
-    .catch(error =>
-      console.error('Error saving tasks to AsyncStorage:', error),
-    );
-};
-
-export const {addTodo, toggleTodo, searchTodo, deleteTodo} = todosSlice.actions;
+export const {
+  addTodo,
+  toggleTodo,
+  updateSearchValue,
+  deleteTodo,
+  toggleCategory,
+} = todosSlice.actions;
 
 export default todosSlice.reducer;

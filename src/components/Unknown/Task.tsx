@@ -1,15 +1,22 @@
 import React from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {BodySB, BodySmall} from './DesignSystem';
 import {CheckedIcon, EventIcon, GoalIcon, TaskIcon} from '../icons';
 import {Todo} from '../../types';
+import {useAppDispatch} from '../../hooks/reduxHooks';
+import {toggleTodo} from '../../store/todoSlice';
 
 interface Props {
   todo: Todo;
 }
 
 const Task: React.FC<Props> = ({todo}) => {
-  const {title, category, completed, time} = todo;
+  const {title, category, completed, time, id} = todo;
+  const dispatch = useAppDispatch();
+
+  const onCompletePress = () => {
+    dispatch(toggleTodo(id));
+  };
 
   const renderIcon = () => {
     switch (category) {
@@ -35,12 +42,13 @@ const Task: React.FC<Props> = ({todo}) => {
           </BodySmall>
         </View>
       </View>
-      <View
+      <TouchableOpacity
+        onPress={onCompletePress}
         className={`border border-violet w-6 h-6 rounded ${
           completed && 'bg-violet'
         }`}>
         <CheckedIcon color="white" />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

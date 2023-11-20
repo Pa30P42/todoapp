@@ -2,14 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import StyledTextInput from '../../Unknown/StyledTextInput';
 import Categories from '../../Categories';
-import {useAppDispatch} from '../../../hooks/reduxHooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks/reduxHooks';
 import {toggleCategory, updateSearchValue} from '../../../store/todoSlice';
 import {TodoCategory} from '../../../types/todo';
+import {RootState} from '../../../store';
 
 const TodoFilterPanel = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const dispatch = useAppDispatch();
+  const selectedCategories = useAppSelector(
+    (state: RootState) => state.todo.selectedCategories,
+  );
 
   const handleSearchChange = (text: string) => {
     setSearchValue(text);
@@ -31,7 +35,10 @@ const TodoFilterPanel = () => {
         value={searchValue}
         placeholder="Search Tasks"
       />
-      <Categories onCategoryPress={selectFilterCategory} />
+      <Categories
+        selectedCategories={selectedCategories}
+        onCategoryPress={selectFilterCategory}
+      />
     </View>
   );
 };

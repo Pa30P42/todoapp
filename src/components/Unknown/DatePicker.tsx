@@ -37,13 +37,10 @@ const DatePicker: React.FC<Props> = ({
     const dateObject = new Date(dateValue);
     if (type === 'date') {
       const formattedDate = dateObject.toLocaleDateString();
-      console.log('onDatePicked', onDatePicked);
       onDatePicked && onDatePicked(formattedDate);
       return setSelectedDate(formattedDate);
     }
-    console.log('onDatePicked outside', onDatePicked);
     const formattedTime = dateObject.toLocaleTimeString();
-    console.log('typeof', typeof formattedTime);
     onDatePicked && onDatePicked(formattedTime);
     return setSelectedDate(formattedTime);
   };

@@ -8,6 +8,7 @@ interface Props {
   value: string;
   multiline?: boolean;
   inputClassName?: string;
+  error?: string;
   onTextChange: (text: string) => void;
 }
 
@@ -17,7 +18,9 @@ const StyledTextInput: React.FC<Props> = ({
   value,
   multiline = false,
   inputClassName = '',
+  error = '',
   onTextChange,
+  ...props
 }) => {
   return (
     <View>
@@ -25,10 +28,12 @@ const StyledTextInput: React.FC<Props> = ({
       <TextInput
         multiline={multiline}
         placeholder={placeholder}
-        className={`px-4 py-5 rounded-md bg-primaryWhite ${inputClassName}`}
+        className={`px-4 py-5 mb-2 rounded-md bg-primaryWhite ${inputClassName}`}
         value={value}
         onChangeText={onTextChange}
+        {...props}
       />
+      <BodySmallSB color="red">{error}</BodySmallSB>
     </View>
   );
 };

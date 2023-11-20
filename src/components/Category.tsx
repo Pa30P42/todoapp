@@ -1,18 +1,14 @@
 import {TouchableOpacity} from 'react-native';
-import {RootState} from '../store';
-import {useAppSelector} from '../hooks/reduxHooks';
 import {TodoCategory} from '../types/todo';
 import {EventIcon, GoalIcon, TaskIcon} from './icons';
 
 interface ICategory {
   type: TodoCategory;
   onPress: (category: TodoCategory) => void;
+  selectedCategories: TodoCategory[];
 }
 
-const Category: React.FC<ICategory> = ({type, onPress}) => {
-  const selectedCategories = useAppSelector(
-    (state: RootState) => state.todo.selectedCategories,
-  );
+const Category: React.FC<ICategory> = ({type, onPress, selectedCategories}) => {
   const icons = {
     goal: <GoalIcon />,
     task: <TaskIcon />,

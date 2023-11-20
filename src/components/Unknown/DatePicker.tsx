@@ -9,9 +9,14 @@ import {DateTimePickerEvent} from '@react-native-community/datetimepicker';
 interface Props {
   type: 'date' | 'time';
   containerStyles?: string;
+  onDatePicked?: (date: string) => void;
 }
 
-const DatePicker: React.FC<Props> = ({type = 'date', containerStyles = ''}) => {
+const DatePicker: React.FC<Props> = ({
+  type = 'date',
+  containerStyles = '',
+  onDatePicked,
+}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const label = type === 'date' ? 'Date' : 'Time';
   const icon = type === 'date' ? <CalendarIcon /> : <ClockIcon />;
@@ -31,10 +36,16 @@ const DatePicker: React.FC<Props> = ({type = 'date', containerStyles = ''}) => {
     setDatePickerVisibility(false);
     const dateObject = new Date(dateValue);
     if (type === 'date') {
-      return setSelectedDate(dateObject.toLocaleDateString());
+      const formattedDate = dateObject.toLocaleDateString();
+      console.log('onDatePicked', onDatePicked);
+      onDatePicked && onDatePicked(formattedDate);
+      return setSelectedDate(formattedDate);
     }
-
-    return setSelectedDate(dateObject.toLocaleTimeString());
+    console.log('onDatePicked outside', onDatePicked);
+    const formattedTime = dateObject.toLocaleTimeString();
+    console.log('typeof', typeof formattedTime);
+    onDatePicked && onDatePicked(formattedTime);
+    return setSelectedDate(formattedTime);
   };
 
   return (

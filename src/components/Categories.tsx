@@ -7,20 +7,34 @@ import Category from './Category';
 interface ICategories {
   containerClassName?: string;
   onCategoryPress: (category: TodoCategory) => void;
+  selectedCategories: TodoCategory[];
 }
 
 const Categories: React.FC<ICategories> = ({
   containerClassName,
   onCategoryPress,
+  selectedCategories,
 }) => {
   return (
     <View className={`flex-row items-center ${containerClassName}`}>
       <BodySmallSB className="mr-6">Category</BodySmallSB>
       <View className="items-center py-3">
         <View className="flex-row justify-between">
-          <Category onPress={onCategoryPress} type="task" />
-          <Category onPress={onCategoryPress} type="event" />
-          <Category onPress={onCategoryPress} type="goal" />
+          <Category
+            selectedCategories={selectedCategories}
+            onPress={onCategoryPress}
+            type="task"
+          />
+          <Category
+            selectedCategories={selectedCategories}
+            onPress={onCategoryPress}
+            type="event"
+          />
+          <Category
+            selectedCategories={selectedCategories}
+            onPress={onCategoryPress}
+            type="goal"
+          />
         </View>
       </View>
     </View>

@@ -4,9 +4,9 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import Home from '../screens/Home';
-import CreateTask from '../screens/CreateTask';
 import Header from '../components/Unknown/Header';
 import CloseButton from '../components/Unknown/CloseButton';
+import CreateTodo from '../screens/CreateTodo';
 
 export type RootStackParams = {
   Home: undefined;
@@ -32,7 +32,7 @@ const RootNavigator: React.FC<NativeStackScreenProps<RootStackParams>> = () => {
           ),
         }}
         name="CreateTask"
-        component={CreateTask}
+        component={CreateTodo}
       />
     </RootStack.Navigator>
   );
